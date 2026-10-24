@@ -1,0 +1,22 @@
+[package]
+name = "tezbar-counter-v2"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "MIT AND Apache-2.0"
+description = "Compiled-in Native V2 Counter adapter for Tezbar"
+repository = "https://github.com/almatkai/counter"
+include = ["src/**", "tests/**", "assets/**", "manifest.json", "tezbar_adapter.rs", "README.md", "LICENSE", "Cargo.lock", "Cargo.toml"]
+
+[dependencies]
+serde_json = { version = "=1.0.145", features = ["float_roundtrip"] }
+ryu-js = "=1.0.2"
+num-bigint = "=0.4.6"
+num-traits = "=0.2.19"
+
+[dev-dependencies]
+tokio = { version = "=1.48.0", features = ["macros", "rt-multi-thread", "sync"] }
+sha2 = "=0.10.9"
+jsonschema = { version = "=0.29.1", default-features = false }
+log = "=0.4.28"
+tempfile = "=3.23.0"

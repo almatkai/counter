@@ -1,5 +1,7 @@
 # Counter for Tezbar
 
+The standalone Rust Native V2 implementation and integration notes are in [v2/README.md](v2/README.md).
+
 A simple counter with live subtitle updates in Tezbar on Windows or macOS.
 
 ## Commands

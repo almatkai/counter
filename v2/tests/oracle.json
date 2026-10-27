@@ -1,0 +1,3550 @@
+[
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": null,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 0,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": -1,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 12.8,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 13,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 13"
+        }
+      ],
+      "value": 13,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 1e+21,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 2,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 2"
+        }
+      ],
+      "value": 2,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": -1e+21,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 100000000000000000000,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 100000000000000000000,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 100000000000000000000"
+        }
+      ],
+      "value": 100000000000000000000,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 1e-7,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 2,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 2"
+        }
+      ],
+      "value": 2,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 0.000001,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 9007199254740992,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 9007199254740992,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 9007199254740992"
+        }
+      ],
+      "value": 9007199254740992,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": -9007199254740992,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -9007199254740991,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -9007199254740991"
+        }
+      ],
+      "value": -9007199254740991,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": 1.7976931348623157e+308,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 2,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 2"
+        }
+      ],
+      "value": 2,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "  +42tail",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 43,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 43"
+        }
+      ],
+      "value": 43,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "-0xFxyz",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -14,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -14"
+        }
+      ],
+      "value": -14,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "+0Xff!",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 256,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 256"
+        }
+      ],
+      "value": 256,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "0b11",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "08",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 9,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 9"
+        }
+      ],
+      "value": 9,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "12e4",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 13,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 13"
+        }
+      ],
+      "value": 13,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "-0",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "900719925474099267",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 900719925474099300,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 900719925474099300"
+        }
+      ],
+      "value": 900719925474099300,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "0x20000000000001",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 9007199254740992,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 9007199254740992"
+        }
+      ],
+      "value": 9007199254740992,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "0x20000000000003",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 9007199254740996,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 9007199254740996"
+        }
+      ],
+      "value": 9007199254740996,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: Infinity"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "bad",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": true,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": [],
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": {},
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "﻿  　-27.9",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -26,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -26"
+        }
+      ],
+      "value": -26,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "42",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": "᠎42",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": true
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": true
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": "false"
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": "false"
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": []
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": []
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": {}
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": {}
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": false
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": false
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 17,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 17"
+        }
+      ],
+      "value": 17,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": null
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": null
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 17,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 17"
+        }
+      ],
+      "value": 17,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": ""
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": ""
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 17,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 17"
+        }
+      ],
+      "value": 17,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": 0
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 1"
+        }
+      ],
+      "value": 1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": 0
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 17,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 17"
+        }
+      ],
+      "value": 17,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": 1
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "increment-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": 1
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": null,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 0,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": -1,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -2,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -2"
+        }
+      ],
+      "value": -2,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 12.8,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 11,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 11"
+        }
+      ],
+      "value": 11,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 1e+21,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": -1e+21,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -2,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -2"
+        }
+      ],
+      "value": -2,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 100000000000000000000,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 100000000000000000000,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 100000000000000000000"
+        }
+      ],
+      "value": 100000000000000000000,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 1e-7,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 0.000001,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 9007199254740992,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 9007199254740991,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 9007199254740991"
+        }
+      ],
+      "value": 9007199254740991,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": -9007199254740992,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -9007199254740992,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -9007199254740992"
+        }
+      ],
+      "value": -9007199254740992,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": 1.7976931348623157e+308,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "  +42tail",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 41,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 41"
+        }
+      ],
+      "value": 41,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "-0xFxyz",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -16,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -16"
+        }
+      ],
+      "value": -16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "+0Xff!",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 254,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 254"
+        }
+      ],
+      "value": 254,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "0b11",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "08",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 7,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 7"
+        }
+      ],
+      "value": 7,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "12e4",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 11,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 11"
+        }
+      ],
+      "value": 11,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "-0",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -1,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "900719925474099267",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 900719925474099300,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 900719925474099300"
+        }
+      ],
+      "value": 900719925474099300,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "0x20000000000001",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 9007199254740991,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 9007199254740991"
+        }
+      ],
+      "value": 9007199254740991,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "0x20000000000003",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 9007199254740996,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 9007199254740996"
+        }
+      ],
+      "value": 9007199254740996,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: Infinity"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "bad",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": true,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": [],
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": {},
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "﻿  　-27.9",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": -28,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -28"
+        }
+      ],
+      "value": -28,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "42",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": "᠎42",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": null,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: NaN"
+        }
+      ],
+      "value": null,
+      "nativeError": true
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": true
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": true
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": "false"
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": "false"
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": []
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": []
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": {}
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": {}
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": false
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": -1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": false
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 15,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 15"
+        }
+      ],
+      "value": 15,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": null
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": -1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": null
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 15,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 15"
+        }
+      ],
+      "value": 15,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": ""
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": -1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": ""
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 15,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 15"
+        }
+      ],
+      "value": 15,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": 0
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": -1
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: -1"
+        }
+      ],
+      "value": -1,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": 0
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 15,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [
+        {
+          "subtitle": "Value: 15"
+        }
+      ],
+      "value": 15,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": 1
+      }
+    },
+    "expected": {
+      "store": {},
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 0"
+        }
+      ],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "decrement-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": 1
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": " 0x10suffix",
+        "future": 9
+      },
+      "writes": 0,
+      "metadata": [
+        {
+          "subtitle": "Value: 16"
+        }
+      ],
+      "value": 16,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": null,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 0,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": -1,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 12.8,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 1e+21,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": -1e+21,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 100000000000000000000,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 1e-7,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 0.000001,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 9007199254740992,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": -9007199254740992,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": 1.7976931348623157e+308,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "  +42tail",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "-0xFxyz",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "+0Xff!",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "0b11",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "08",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "12e4",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "-0",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "900719925474099267",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "0x20000000000001",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "0x20000000000003",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "bad",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": true,
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": [],
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": {},
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "﻿  　-27.9",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "42",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": "᠎42",
+      "future": {
+        "keep": true
+      }
+    },
+    "payload": {},
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": {
+          "keep": true
+        }
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": true
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": true
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": "false"
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": "false"
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": []
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": []
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": {}
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": {}
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": false
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": false
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": null
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": null
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": ""
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": ""
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": 0
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": 0
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {},
+    "payload": {
+      "launchContext": {
+        "noUpdate": 1
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  },
+  {
+    "command": "reset-counter",
+    "store": {
+      "counter": " 0x10suffix",
+      "future": 9
+    },
+    "payload": {
+      "launchContext": {
+        "noUpdate": 1
+      }
+    },
+    "expected": {
+      "store": {
+        "counter": 0,
+        "future": 9
+      },
+      "writes": 1,
+      "metadata": [],
+      "value": 0,
+      "nativeError": false
+    }
+  }
+]

@@ -1,0 +1,2 @@
+# Preserve exact upstream notice bytes, including original whitespace, on all targets.
+/licenses/crates/** -text -whitespace

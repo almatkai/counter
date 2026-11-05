@@ -50,6 +50,18 @@ preserved unchanged; the native package lives alongside it:
 | `scripts/package.py`, `scripts/smoke-package.py` | Build ZIP + SHA sidecars; offline ZIP smoke |
 | `resources/`, `licenses/`, `NOTICE` | Packaged icon (byte-identical to `command-icon.png`) and notices |
 
+### Download and install
+
+[Native Rust 1.0.0 release](https://github.com/almatkai/counter/releases/tag/v1.0.0): [macOS Apple Silicon ZIP](https://github.com/almatkai/counter/releases/download/v1.0.0/counter-aarch64-apple-darwin.zip), [Windows x64 ZIP](https://github.com/almatkai/counter/releases/download/v1.0.0/counter-x86_64-pc-windows-msvc.zip), and [trusted install reference](https://github.com/almatkai/counter/releases/download/v1.0.0/extension-release.json).
+
+Download the trusted JSON and your platform ZIP, then import them with:
+
+```sh
+tezbar --extensions-v3-import extension-release.json counter-<target>.zip
+```
+
+Both native builds, extracted-package protocol checks and Tezbar CLI imports into isolated profiles passed. [Validation and exact hashes](https://github.com/almatkai/counter/releases/download/v1.0.0/validation.json) record the tested source. Real desktop clipboard, selection and focus QA remains pending. Store discovery requires a Tezbar catalog update.
+
 ### Behavior
 
 All three original commands are implemented natively by the existing V2 engine:
@@ -112,6 +124,4 @@ membership in `licenses/dependency-license-index.json`. Regenerate with
 The script also rejects release dependencies whose declared MSRV exceeds 1.85;
 the macOS release is built with Rust 1.85, and Windows compilation is central QA.
 
-Verification status: offline protocol and package smoke on macOS arm64 only.
-Launcher UI QA has not been performed on either platform, and Windows has not been
-built or executed.
+Verification status: native macOS arm64 and Windows x64 builds, offline process/package checks and isolated CLI installs passed. Launcher UI and actual OS effects have not been verified on either platform.

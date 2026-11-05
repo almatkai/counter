@@ -1,0 +1,16 @@
+Counter for Tezbar — standalone Rust process extension
+
+Original Raycast extension "counter" by EvanZhouDev; contributor pernielsentikaer.
+Upstream: https://github.com/raycast/extensions, path extensions/counter,
+commit 6734d85992290066fd31a7f5bee3cca3d3545a1a (MIT, Copyright (c) 2021 Raycast).
+Tezbar port by almatkai (MIT, Copyright (c) 2026 almatkai).
+The original command icon is preserved unchanged (resources/assets/command-icon.png).
+
+The executable statically links the Tezbar Rust extension SDK
+(https://github.com/almatkai/tezbar-extension-sdk-rust, revision
+aaec571673ab64a85a136cf6bd054ef660c4d93c), Copyright 2026 Almat, Apache-2.0;
+see licenses/Apache-2.0.txt. Counter-derived code and assets: licenses/counter-MIT.txt.
+Other statically linked crates (serde_json, tokio, ryu-js, num-bigint, num-traits,
+uuid, tempfile and their dependencies) are distributed under their MIT and/or
+Apache-2.0 licenses; versions are pinned in Cargo.lock.
+No trademark rights are claimed.

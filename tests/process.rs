@@ -80,7 +80,11 @@ impl Peer {
                     if let Some(i) = ids.iter().position(|x| *x == id) {
                         ids.remove(i);
                         let r = match frame.get("error") {
-                            Some(e) => Err(e.clone()),
+                            Some(e) => {
+                                assert_eq!(e["code"], "extension_error");
+                                assert!(e["message"].as_str().is_some_and(|s| !s.is_empty()));
+                                Err(e.clone())
+                            }
                             None => Ok(frame["result"].clone()),
                         };
                         out.insert(id, r);
@@ -89,7 +93,7 @@ impl Peer {
                 "request" => {
                     // Narrow fake host: nothing is granted, so every reverse RPC is refused.
                     self.reverse.push(frame.clone());
-                    self.send(json!({"type":"response","id":frame["id"],"error":{"message":"capability not granted"}})).await;
+                    self.send(json!({"type":"response","id":frame["id"],"error":{"code":"capability_denied","message":"capability not granted"}})).await;
                 }
                 "event" => {}
                 other => panic!("unexpected frame type {other}: {frame}"),
@@ -107,16 +111,25 @@ impl Peer {
         assert_eq!(hello["id"], ID);
         assert_eq!(hello["protocol"], 1);
         assert_eq!(hello["version"], env!("CARGO_PKG_VERSION"));
+        assert_eq!(hello["sdkVersion"], "0.1.1");
+        assert!(hello["features"]
+            .as_array()
+            .unwrap()
+            .contains(&json!("launcher.v1")));
         let r = self
             .call(
                 "initialize",
-                json!({"protocol":1,"extensionId":ID,"platform":if cfg!(windows) {"Windows"} else {"macOS"},
+                json!({"protocol":1,"extensionId":ID,"platform":host_platform(),
                 "packageDir":env!("CARGO_MANIFEST_DIR"),"dataDir":dir.join("data"),"tempDir":dir.join("temp"),
-                "grantedCapabilities":[],"reason":"command","migrationPaths":migrations}),
+                "grantedCapabilities":[],"reason":"command","migrationPaths":migrations,"hostFeatures":["launcher.v1"]}),
             )
             .await
             .unwrap();
         assert_eq!(r["ready"], true);
+        assert!(r["features"]
+            .as_array()
+            .unwrap()
+            .contains(&json!("launcher.v1")));
     }
     async fn run(&mut self, session: &str, command: &str, extra: Value) -> Result<Value, Value> {
         let mut params =
@@ -125,7 +138,8 @@ impl Peer {
             params[k] = v.clone();
         }
         let result = self.call("session.open", params).await;
-        if result.is_ok() {
+        if let Ok(value) = &result {
+            launcher_message(value);
             self.call("session.dispose", json!({"sessionId":session}))
                 .await
                 .unwrap();
@@ -145,6 +159,47 @@ impl Peer {
             self.reverse
         );
     }
+}
+
+// process_install::target() and native.rs session annotation leave successful
+// no-view results intact. CommandBar.executeExtensionCommandViaRuntime checks
+// `ok`, skips the view branch, and passes `message` to showActionMsg. Checking
+// effects alone would not establish visible initial command feedback.
+fn launcher_message(result: &Value) -> &str {
+    assert_eq!(result["ok"], true);
+    assert_eq!(result["mode"], "no-view");
+    let message = result["message"]
+        .as_str()
+        .expect("launcher message required");
+    assert!(!message.is_empty());
+    message
+}
+
+fn host_platform() -> String {
+    format!(
+        "{}-{}",
+        std::env::consts::ARCH,
+        if cfg!(windows) {
+            "pc-windows-msvc"
+        } else {
+            "apple-darwin"
+        }
+    )
+}
+
+// Match process_host::migration_paths: only declared existing source files are
+// forwarded from the profile. Fixtures contain no symlinks or directories.
+fn migration_grants(profile: &Path) -> Value {
+    manifest()["migrationPaths"]
+        .as_object()
+        .unwrap()
+        .iter()
+        .filter_map(|(key, relative)| {
+            let path = profile.join(relative.as_str().unwrap());
+            path.is_file().then(|| (key.clone(), json!(path)))
+        })
+        .collect::<serde_json::Map<_, _>>()
+        .into()
 }
 
 fn store(dir: &Path) -> Value {
@@ -298,7 +353,7 @@ async fn migrated_counter_increment_decrement_no_update_reset_and_errors() {
     assert!(peer
         .call(
             "session.call",
-            json!({"sessionId":"s7","operation":"extension:action","payload":{"actionId":"x"}})
+            json!({"sessionId":"s7","operation":"extension:invoke-action","payload":{"actionId":"x"}})
         )
         .await
         .is_err());
@@ -330,6 +385,138 @@ async fn migrated_counter_increment_decrement_no_update_reset_and_errors() {
         "legacy store is never modified"
     );
     peer.shutdown().await;
+}
+
+#[tokio::test]
+async fn each_host_granted_migration_layout_and_resolver_precedence_survives_restart() {
+    // V2 first, followed by extension-registry.ts resolver candidates in order.
+    let ordered = [
+        ("nativeStore", "native-extensions-v2/counter/storage.json"),
+        (
+            "legacyLocalStorage",
+            "extensions/counter/.tezbar-local-storage.json",
+        ),
+        (
+            "legacyRaycastStorage",
+            "extensions/raycast.counter/.tezbar-local-storage.json",
+        ),
+        (
+            "legacyPackageStorage",
+            "extensions/packages/raycast.counter/.tezbar-local-storage.json",
+        ),
+        (
+            "legacyRegistryStorage",
+            "extension-registry/packages/raycast.counter/.tezbar-local-storage.json",
+        ),
+    ];
+    // Each layout alone plus all nonempty suffixes proves precedence and fallback.
+    for selected in (0..ordered.len())
+        .map(|i| vec![i])
+        .chain((0..ordered.len() - 1).map(|i| (i..ordered.len()).collect()))
+    {
+        let dir = tempfile::tempdir().unwrap();
+        let profile = dir.path().join("profile");
+        let mut originals = vec![];
+        for &i in &selected {
+            let (key, relative) = ordered[i];
+            assert_eq!(manifest()["migrationPaths"][key], relative);
+            let path = profile.join(relative);
+            std::fs::create_dir_all(path.parent().unwrap()).unwrap();
+            let bytes = serde_json::to_vec(
+                &json!({"counter": format!("{} items", 41 + i), "legacyOnly": "keep"}),
+            )
+            .unwrap();
+            std::fs::write(&path, &bytes).unwrap();
+            originals.push((path, bytes));
+        }
+        let grants = migration_grants(&profile);
+        assert_eq!(grants.as_object().unwrap().len(), selected.len());
+        let expected = (42 + selected[0]) as f64;
+        let mut peer = Peer::start().await;
+        peer.initialize(dir.path(), grants.clone()).await;
+        assert_eq!(
+            store(dir.path())["_tezbarMigration"]["source"],
+            ordered[selected[0]].0
+        );
+        let result = peer
+            .run("migrated", "increment-counter", json!({}))
+            .await
+            .unwrap();
+        assert_eq!(launcher_message(&result), format!("Value: {expected}"));
+        assert_eq!(store(dir.path())["counter"].as_f64(), Some(expected));
+        assert_eq!(
+            store(dir.path()).get("legacyOnly").is_some(),
+            selected[0] == 0
+        );
+        peer.shutdown().await;
+
+        let before = std::fs::read(dir.path().join("data/counter/storage.json")).unwrap();
+        let mut again = Peer::start().await;
+        again.initialize(dir.path(), grants).await;
+        let result = again
+            .run(
+                "restart",
+                "decrement-counter",
+                json!({"launchContext":{"noUpdate":true}}),
+            )
+            .await
+            .unwrap();
+        assert_eq!(launcher_message(&result), format!("Value: {expected}"));
+        assert_eq!(
+            std::fs::read(dir.path().join("data/counter/storage.json")).unwrap(),
+            before
+        );
+        again.shutdown().await;
+        for (path, bytes) in originals {
+            assert_eq!(
+                std::fs::read(path).unwrap(),
+                bytes,
+                "legacy bytes survive initialization, commands and restart"
+            );
+        }
+    }
+}
+
+#[tokio::test]
+async fn intentional_private_counters_and_completed_empty_source_markers_are_never_recovered() {
+    for counter in [0, 7, -3] {
+        for marked in [false, true] {
+            let dir = tempfile::tempdir().unwrap();
+            let profile = dir.path().join("profile");
+            let source = profile.join("extensions/raycast.counter/.tezbar-local-storage.json");
+            std::fs::create_dir_all(source.parent().unwrap()).unwrap();
+            let legacy = br#"{"counter":"41"}"#;
+            std::fs::write(&source, legacy).unwrap();
+            let mut private = json!({"counter":counter,"future":{"keep":true}});
+            if marked {
+                private["_tezbarMigration"] = json!({"version":1,"source":null});
+            }
+            let path = dir.path().join("data/counter/storage.json");
+            std::fs::create_dir_all(path.parent().unwrap()).unwrap();
+            let before = serde_json::to_vec(&private).unwrap();
+            std::fs::write(&path, &before).unwrap();
+            let mut peer = Peer::start().await;
+            peer.initialize(dir.path(), migration_grants(&profile))
+                .await;
+            let result = peer
+                .run(
+                    "private",
+                    "increment-counter",
+                    json!({"launchContext":{"noUpdate":true}}),
+                )
+                .await
+                .unwrap();
+            assert_eq!(launcher_message(&result), format!("Value: {counter}"));
+            assert_eq!(store(dir.path())["counter"], counter);
+            assert_eq!(store(dir.path())["future"], private["future"]);
+            assert_eq!(store(dir.path())["_tezbarMigration"]["source"], Value::Null);
+            if marked {
+                assert_eq!(std::fs::read(path).unwrap(), before);
+            }
+            assert_eq!(std::fs::read(source).unwrap(), legacy);
+            peer.shutdown().await;
+        }
+    }
 }
 
 #[tokio::test]

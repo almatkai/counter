@@ -13,8 +13,9 @@ pub const MARKER: &str = "_tezbarMigration";
 /// Native V2 store `{counter: <json>, ...}`; unknown keys are preserved too.
 pub const NATIVE_STORE: &str = "nativeStore";
 /// Raycast `LocalStorage` shim files (`Record<string,string>`), in priority order.
-pub const LOCAL_STORAGE: [&str; 3] = [
+pub const LOCAL_STORAGE: [&str; 4] = [
     "legacyLocalStorage",
+    "legacyRaycastStorage",
     "legacyPackageStorage",
     "legacyRegistryStorage",
 ];

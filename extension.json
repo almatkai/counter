@@ -81,6 +81,7 @@
   "migrationPaths": {
     "nativeStore": "native-extensions-v2/counter/storage.json",
     "legacyLocalStorage": "extensions/counter/.tezbar-local-storage.json",
+    "legacyRaycastStorage": "extensions/raycast.counter/.tezbar-local-storage.json",
     "legacyPackageStorage": "extensions/packages/raycast.counter/.tezbar-local-storage.json",
     "legacyRegistryStorage": "extension-registry/packages/raycast.counter/.tezbar-local-storage.json"
   },

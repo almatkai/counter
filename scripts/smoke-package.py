@@ -6,13 +6,13 @@ reverse request, so a run must not touch the desktop, clipboard, browser or netw
 `--open COMMAND[=MESSAGE]` (repeatable, in order) opens a session, checks its
 mode against the manifest and optionally its no-view message, then disposes it.
 """
-import argparse, hashlib, json, os, queue, stat, subprocess, tempfile, threading, uuid, zipfile
+import argparse, hashlib, json, os, platform, queue, stat, subprocess, tempfile, threading, uuid, zipfile
 from pathlib import Path, PurePosixPath
 
 MAX_FRAME = 16 * 1024 * 1024
 
 
-def smoke(path, opens):
+def smoke(path, opens, legacy_counter=None):
     with tempfile.TemporaryDirectory() as temp, zipfile.ZipFile(path) as archive:
         root = Path(temp) / 'package'
         root.mkdir()
@@ -27,6 +27,18 @@ def smoke(path, opens):
         assert set(names) == set(inventory) | {'extension.json'}, 'ZIP/inventory mismatch'
         for name, digest in inventory.items():
             assert hashlib.sha256(archive.read(name)).hexdigest() == digest, 'SHA inventory mismatch: ' + name
+        notices = json.loads(archive.read('licenses/dependency-license-index.json'))
+        assert notices['targets'] == ['aarch64-apple-darwin', 'x86_64-pc-windows-msvc']
+        sdk = next(e for e in notices['dependencies'] if e['name'] == 'tezbar-extension-sdk')
+        assert sdk['source'].endswith('#aaec571673ab64a85a136cf6bd054ef660c4d93c')
+        assert {PurePosixPath(n).name for n in sdk['documents']} >= {'LICENSE', 'NOTICE'}
+        assert any(e['name'] == 'tokio' for e in notices['dependencies'])
+        for entry in notices['dependencies']:
+            assert entry['targets'] and set(entry['targets']) <= set(notices['targets'])
+            for name, digest in entry['documents'].items():
+                assert name.startswith('licenses/crates/') and '\\' not in name
+                assert inventory[name] == digest
+                assert hashlib.sha256(archive.read(name)).hexdigest() == digest
         assert manifest['schemaVersion'] == 3 and manifest['execution'] == 'process' and manifest['protocolVersion'] == 1
         assert manifest['id'] == 'com.tezbar.native.' + manifest['slug']
         assert not manifest.get('icon') or manifest['icon'] in inventory, 'Icon not packaged'
@@ -81,27 +93,46 @@ def smoke(path, opens):
                     return frame['result']
                 if frame['type'] == 'request':
                     reverse.append(frame)
-                    send({'type': 'response', 'id': frame['id'], 'error': {'message': 'smoke host refuses reverse requests'}})
+                    send({'type': 'response', 'id': frame['id'], 'error': {'code': 'capability_denied', 'message': 'smoke host refuses reverse requests'}})
                     continue
                 assert frame['type'] == 'event', frame
 
         data = Path(temp) / 'data'
+        migrations = {}
+        legacy = None
+        if legacy_counter is not None:
+            relative = manifest['migrationPaths']['legacyRaycastStorage']
+            assert relative == 'extensions/raycast.counter/.tezbar-local-storage.json'
+            legacy = Path(temp) / 'profile' / relative
+            legacy.parent.mkdir(parents=True)
+            original = json.dumps({'counter': str(legacy_counter)}).encode()
+            legacy.write_bytes(original)
+            migrations['legacyRaycastStorage'] = str(legacy)
+        arch = {'arm64': 'aarch64', 'AMD64': 'x86_64'}.get(platform.machine(), platform.machine())
+        triple = arch + ('-pc-windows-msvc' if os.name == 'nt' else '-apple-darwin')
         try:
             hello = receive()
             assert hello['type'] == 'hello' and hello['id'] == manifest['id'] and hello['version'] == manifest['version'] and hello['protocol'] == 1
-            ready = request('initialize', {'protocol': 1, 'extensionId': manifest['id'], 'platform': 'Windows' if os.name == 'nt' else 'macOS',
+            assert hello['sdkVersion'] == '0.1.1' and 'launcher.v1' in hello['features']
+            ready = request('initialize', {'protocol': 1, 'extensionId': manifest['id'], 'platform': triple,
                                            'packageDir': str(root), 'dataDir': str(data), 'tempDir': str(Path(temp) / 'temp'),
-                                           'grantedCapabilities': manifest['capabilities'], 'reason': 'command', 'migrationPaths': {}})
-            assert ready.get('ready') is True, ready
+                                           'grantedCapabilities': manifest['capabilities'], 'reason': 'command', 'migrationPaths': migrations, 'hostFeatures': ['launcher.v1']})
+            assert ready.get('ready') is True and 'launcher.v1' in ready['features'], ready
             for index, spec in enumerate(opens or [manifest['commands'][0]['name']]):
                 command, _, message = spec.partition('=')
                 session = f'zip-smoke-{index}'
                 result = request('session.open', {'sessionId': session, 'commandName': command, 'preferences': {}, 'argumentValues': {}})
-                assert result['mode'] == modes[command], (command, result)
+                assert result['ok'] is True and result['mode'] == modes[command], (command, result)
+                # native.rs leaves no-view success intact; CommandBar consumes message.
+                assert result['mode'] == 'no-view' and isinstance(result.get('message'), str) and result['message'], result
                 if message:
                     assert result.get('message') == message, (command, result)
                 request('session.dispose', {'sessionId': session})
                 print(f'  {command}: mode={result["mode"]} message={result.get("message")!r}')
+            if legacy is not None:
+                assert legacy.read_bytes() == original, 'Legacy source modified'
+                store = json.loads((data / 'counter/storage.json').read_text())
+                assert store['_tezbarMigration']['source'] == 'legacyRaycastStorage'
             request('shutdown', {})
             assert process.wait(timeout=5) == 0, 'Process did not exit cleanly'
         finally:
@@ -118,5 +149,6 @@ if __name__ == '__main__':
     p = argparse.ArgumentParser()
     p.add_argument('archive', type=Path)
     p.add_argument('--open', action='append', default=[], metavar='COMMAND[=MESSAGE]')
+    p.add_argument('--legacy-counter', type=int, help='Seed the real extensions/raycast.counter migration layout')
     a = p.parse_args()
-    smoke(a.archive, a.open)
+    smoke(a.archive, a.open, a.legacy_counter)

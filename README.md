@@ -77,8 +77,9 @@ On initialize, if the private store has no counter and no migration marker, the
 value is imported once from the host-granted `migrationPaths`, in order:
 `nativeStore` (`native-extensions-v2/counter/storage.json`, all keys kept), then the
 JavaScript runtime's LocalStorage shim files (`extensions/counter/`,
-`extensions/packages/raycast.counter/`, `extension-registry/packages/raycast.counter/`
+`extensions/raycast.counter/`, `extensions/packages/raycast.counter/`, `extension-registry/packages/raycast.counter/`
 `.tezbar-local-storage.json`, `counter` key only, text kept for `parseInt`).
+Existing private counters and completed migration markers always win, including an intentional zero.
 Sources are only read, never modified. A malformed source is skipped and the
 import retried on a later start. The marker `_tezbarMigration` records the source.
 
@@ -90,6 +91,7 @@ cargo test -j2 --locked                 # adapter, migration and real-process te
 cargo clippy -j2 --locked --all-targets -- -D warnings
 (cd v2 && CARGO_TARGET_DIR="$PWD/target" cargo test -j2 --locked)   # preserved V2 behavior suite
 cargo build -j2 --locked --release --target aarch64-apple-darwin  # executable builds on Rust >= 1.85
+python3 -I scripts/vendor-licenses.py --check  # both targets; locked normal/build closure + MSRV
 python3 -I scripts/package.py --target aarch64-apple-darwin \
   --binary target/aarch64-apple-darwin/release/tezbar-counter
 python3 -I scripts/smoke-package.py dist/counter-aarch64-apple-darwin.zip \
@@ -101,6 +103,14 @@ python3 -I scripts/smoke-package.py dist/counter-aarch64-apple-darwin.zip \
 root holds `extension.json` (complete `files` inventory, empty `artifacts`),
 `bin/tezbar-counter[.exe]`, `resources/`, `licenses/`, `LICENSE` and `NOTICE`.
 Windows x64 (`x86_64-pc-windows-msvc`) uses the same scripts on a Windows host.
+
+Packaging first checks `scripts/vendor-licenses.py --check`. Exact upstream
+LICENSE/NOTICE/COPYRIGHT documents (including the SDK LICENSE and NOTICE) for
+both targets are bundled under `licenses/crates/`, with hashes and target
+membership in `licenses/dependency-license-index.json`. Regenerate with
+`python3 -I scripts/vendor-licenses.py` after an intentional lockfile change.
+The script also rejects release dependencies whose declared MSRV exceeds 1.85;
+the macOS release is built with Rust 1.85, and Windows compilation is central QA.
 
 Verification status: offline protocol and package smoke on macOS arm64 only.
 Launcher UI QA has not been performed on either platform, and Windows has not been

@@ -10,7 +10,9 @@ The executable statically links the Tezbar Rust extension SDK
 (https://github.com/almatkai/tezbar-extension-sdk-rust, revision
 aaec571673ab64a85a136cf6bd054ef660c4d93c), Copyright 2026 Almat, Apache-2.0;
 see licenses/Apache-2.0.txt. Counter-derived code and assets: licenses/counter-MIT.txt.
-Other statically linked crates (serde_json, tokio, ryu-js, num-bigint, num-traits,
-uuid, tempfile and their dependencies) are distributed under their MIT and/or
-Apache-2.0 licenses; versions are pinned in Cargo.lock.
+Exact SDK LICENSE and NOTICE and third-party dependency license, notice and
+copyright documents are preserved in licenses/crates/. See licenses/THIRD_PARTY.md
+and licenses/dependency-license-index.json for the locked normal/build dependency
+closure, declared licenses, target membership and document SHA256 hashes for
+macOS arm64 and Windows x64. All supplied alternative-license documents are kept.
 No trademark rights are claimed.

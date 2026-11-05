@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build the frozen root-layout ZIP, SHA inventory and sidecars. Never uploads."""
-import argparse, hashlib, json, re, shutil, stat, subprocess, tempfile, zipfile
+import argparse, hashlib, json, re, shutil, stat, subprocess, sys, tempfile, zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +28,8 @@ def check_sdk():
 
 def build(target, binary, output):
     check_sdk()
+    # Fail before writing any ZIP if the locked two-target notice inventory is stale.
+    subprocess.run([sys.executable, "-I", str(ROOT / "scripts/vendor-licenses.py"), "--check"], cwd=ROOT, check=True)
     manifest = json.loads((ROOT / 'extension.json').read_text())
     slug = manifest['slug']
     windows = TARGETS[target]
@@ -54,6 +56,12 @@ def build(target, binary, output):
                 raise ValueError('Symlinks cannot be packaged')
             if path.is_file():
                 files[path.relative_to(stage).as_posix()] = digest(path)
+        # Recheck copied bytes too, before opening the ZIP (source verification
+        # happened before staging). Never ship a notice with a stale indexed hash.
+        notices = json.loads((stage / 'licenses/dependency-license-index.json').read_text())
+        for dependency in notices['dependencies']:
+            for name, expected_hash in dependency['documents'].items():
+                assert files.get(name) == expected_hash, 'Staged notice mismatch: ' + name
         manifest['files'] = files
         # The parent supplies published archive URLs/digests in the trusted host catalog.
         manifest['artifacts'] = {}
